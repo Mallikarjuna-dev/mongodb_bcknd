@@ -1,7 +1,10 @@
 const express = require("express");
+
 const mongoose = require("mongoose");
 
 const app = express();
+
+app.use(express.json());
 
 //step 1: connect to mongoDB
 mongoose.set("strictQuery", false);
@@ -22,7 +25,6 @@ const userSchema = new mongoose.Schema({
     ip_address: { type: "String", required: false }
 })
 
-
 //step 3: create a model
 // let User;
 // try {
@@ -34,9 +36,23 @@ const userSchema = new mongoose.Schema({
 const User = mongoose.model("mock", userSchema);
 
 
+app.post("/mocks", async (req, res) => {
+    try {
+        console.log(req.body)
+        const user = User.create(req.body);
+        return res.send(user);
+    } catch (e) {
+        return res.send(e.message)
+    }
+})
+
 app.get("/mocks", async (req, res) => {
-    const users = await User.find().lean().exec(); //mongoose obj to json obj and resolve full promise
-    return res.send(users)
+    try {
+        const users = await User.find().lean().exec(); //mongoose obj to json obj and resolve full promise
+        return res.send(users)
+    } catch (e) {
+        return res.send(e.message)
+    }
 });
 
 
