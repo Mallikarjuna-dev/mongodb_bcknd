@@ -31,12 +31,11 @@ const userSchema = new mongoose.Schema({
 // catch (e) {
 //     console.log("error:", e.message)
 // }
-
 const User = mongoose.model("mock", userSchema);
 
 
 app.get("/mocks", async (req, res) => {
-    const users = await User.find().lean().exec()
+    const users = await User.find().lean().exec(); //mongoose obj to json obj and resolve full promise
     return res.send(users)
 });
 
