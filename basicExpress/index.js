@@ -23,6 +23,9 @@ const userSchema = new mongoose.Schema({
     email: { type: "String", required: true },
     gender: { type: "String", required: false, default: "Male" },
     ip_address: { type: "String", required: false }
+}, {
+    versionKey: false,
+    timestamps: true
 })
 
 //step 3: create a model
@@ -38,17 +41,50 @@ const User = mongoose.model("mock", userSchema);
 
 app.post("/mocks", async (req, res) => {
     try {
-        console.log(req.body)
-        const user = User.create(req.body);
-        return res.send(user);
-    } catch (e) {
-        return res.send(e.message)
+        const users = User.create(req.body);
+        res.send(users);
+    } catch (err) {
+        return res.send(err.message)
     }
 })
 
 app.get("/mocks", async (req, res) => {
     try {
         const users = await User.find().lean().exec(); //mongoose obj to json obj and resolve full promise
+        return res.send(users)
+    } catch (e) {
+        return res.send(e.message)
+    }
+});
+
+
+app.get("/mocks/:id", async (req, res) => {
+    try {
+        // console.log(req.params)
+        const users = await User.findById(req.params.id).lean().exec(); //mongoose obj to json obj and resolve full promise
+        return res.send(users)
+    } catch (e) {
+        return res.send(e.message)
+    }
+});
+
+
+app.patch("/mocks/:id", async (req, res) => {
+    try {
+        console.log(req.params)
+        const users = await User.findByIdAndUpdate(req.params.id, req.body, { new: true })
+            .lean().exec(); //mongoose obj to json obj and resolve full promise
+        return res.send(users)
+    } catch (e) {
+        return res.send(e.message)
+    }
+});
+
+
+app.delete("/mocks/:id", async (req, res) => {
+    try {
+        console.log(req.params)
+        const users = await User.findByIdAndDelete(req.params.id).lean().exec(); //mongoose obj to json obj and resolve full promise
         return res.send(users)
     } catch (e) {
         return res.send(e.message)
