@@ -44,6 +44,9 @@ const postSchema = new mongoose.Schema({
     body: { type: "String", required: true },
     user_id: { type: mongoose.Schema.Types.ObjectId, ref: "mock", required: true },
     tag_ids: [{ type: mongoose.Schema.Types.ObjectId, ref: "tag", required: true }]
+}, {
+    versionKey: false,
+    timestamps: true
 })
 
 const Post = mongoose.model('post', postSchema);
@@ -52,6 +55,9 @@ const Post = mongoose.model('post', postSchema);
 const commentSchema = new mongoose.Schema({
     content: { type: "String", required: true },
     post_id: { type: mongoose.Schema.Types.ObjectId, ref: "post", required: true }
+}, {
+    versionKey: false,
+    timestamps: true
 })
 
 
@@ -60,6 +66,9 @@ const Comment = mongoose.model('comment', commentSchema);
 
 const tagSchema = new mongoose.Schema({
     name: { type: "String", required: true },
+}, {
+    versionKey: false,
+    timestamps: true
 })
 
 
@@ -126,7 +135,7 @@ app.post("/tags", async (req, res) => {
         const tag = await Tag.create(req.body);
         return res.send(tag);
     } catch (err) {
-        return res.status(500).send(e.message);
+        return res.status(500).send(err.message);
     }
 })
 
