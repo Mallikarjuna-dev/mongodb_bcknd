@@ -6,7 +6,7 @@ const User = require("../models/user.model")
 
 
 // user CRUD methods
-router.post("/mocks", async (req, res) => {
+router.post("", async (req, res) => {
     try {
         const users = await User.create(req.body);
         return res.status(201).send(users);
@@ -15,7 +15,7 @@ router.post("/mocks", async (req, res) => {
     }
 })
 
-router.get("/mocks", async (req, res) => {
+router.get("", async (req, res) => {
     try {
         const users = await User.find().lean().exec(); //mongoose obj to json obj and resolve full promise
         return res.send(users)
@@ -25,7 +25,7 @@ router.get("/mocks", async (req, res) => {
 });
 
 
-router.get("/mocks/:id", async (req, res) => {
+router.get("/:id", async (req, res) => {
     try {
         // console.log(req.params)
         const users = await User.findById(req.params.id).lean().exec(); //mongoose obj to json obj and resolve full promise
@@ -36,7 +36,7 @@ router.get("/mocks/:id", async (req, res) => {
 });
 
 
-router.patch("/mocks/:id", async (req, res) => {
+router.patch("/:id", async (req, res) => {
     try {
         console.log(req.params)
         const users = await User.findByIdAndUpdate(req.params.id, req.body, { new: true })
@@ -48,7 +48,7 @@ router.patch("/mocks/:id", async (req, res) => {
 });
 
 
-router.delete("/mocks/:id", async (req, res) => {
+router.delete("/:id", async (req, res) => {
     try {
         console.log(req.params)
         const users = await User.findByIdAndDelete(req.params.id).lean().exec(); //mongoose obj to json obj and resolve full promise
