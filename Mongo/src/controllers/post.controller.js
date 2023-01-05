@@ -2,11 +2,11 @@ const express = require('express');
 
 const router = express.Router();
 
-const Post = require("../models/post.model")
+const Post = require("../models/")
 
 // post CRUD methods
 
-router.post("/posts", async (req, res) => {
+router.post("", async (req, res) => {
     try {
         const posts = await Post.create(req.body);
         return res.status(201).send(posts);
@@ -15,7 +15,7 @@ router.post("/posts", async (req, res) => {
     }
 })
 
-router.get("/posts", async (req, res) => {
+router.get("", async (req, res) => {
     try {
         const posts = await Post.find().lean().exec(); //mongoose obj to json obj and resolve full promise
         return res.send(posts)
@@ -25,7 +25,7 @@ router.get("/posts", async (req, res) => {
 });
 
 
-router.get("/posts/:id", async (req, res) => {
+router.get("/:id", async (req, res) => {
     try {
         // console.log(req.params)
         const posts = await Post.findById(req.params.id).lean().exec(); //mongoose obj to json obj and resolve full promise
@@ -36,7 +36,7 @@ router.get("/posts/:id", async (req, res) => {
 });
 
 
-router.patch("/posts/:id", async (req, res) => {
+router.patch("/:id", async (req, res) => {
     try {
         console.log(req.params)
         const posts = await Post.findByIdAndUpdate(req.params.id, req.body, { new: true })
@@ -48,7 +48,7 @@ router.patch("/posts/:id", async (req, res) => {
 });
 
 
-router.delete("/posts/:id", async (req, res) => {
+router.delete("/:id", async (req, res) => {
     try {
         console.log(req.params)
         const posts = await Post.findByIdAndDelete(req.params.id).lean().exec(); //mongoose obj to json obj and resolve full promise
