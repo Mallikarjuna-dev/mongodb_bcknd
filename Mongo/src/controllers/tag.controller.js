@@ -2,6 +2,7 @@ const express = require('express');
 
 const router = express.Router();
 
+const Tag = require("../models/tag.model")
 
 
 // tag CRUD requests
