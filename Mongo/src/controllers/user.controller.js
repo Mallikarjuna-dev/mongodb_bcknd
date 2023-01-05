@@ -2,6 +2,8 @@ const express = require('express');
 
 const router = express.Router();
 
+const User = require("../models/user.model")
+
 
 // user CRUD methods
 router.post("/mocks", async (req, res) => {
