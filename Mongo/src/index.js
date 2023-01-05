@@ -4,6 +4,8 @@ const mongoose = require("mongoose");
 
 const connect = require("./configs/db")
 
+const User = require("./modals/user.modal")
+
 const app = express();
 
 app.use(express.json());
@@ -18,28 +20,6 @@ app.use(express.json());
 //  mongodb://127.0.0.1:27017/
 //  mongodb+srv://mallikarjuna27:Ajju_2748@cluster0.orelrvq.mongodb.net/project?retryWrites=true&w=majority
 
-//step 2: create a Schema
-const userSchema = new mongoose.Schema({
-    id: { type: "Number", required: true },
-    first_name: { type: "String", required: true },
-    last_name: { type: "String", required: true },
-    email: { type: "String", required: true },
-    gender: { type: "String", required: false, default: "Male" },
-    ip_address: { type: "String", required: false }
-}, {
-    versionKey: false,
-    timestamps: true
-})
-
-//step 3: create a model
-// let User;
-// try {
-//     User = mongoose.model("mock", userSchema)
-// }
-// catch (e) {
-//     console.log("error:", e.message)
-// }
-const User = mongoose.model("mock", userSchema);
 
 
 const postSchema = new mongoose.Schema({
