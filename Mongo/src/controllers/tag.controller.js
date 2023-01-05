@@ -6,7 +6,7 @@ const Tag = require("../models/tag.model")
 
 
 // tag CRUD requests
-router.post("/tags", async (req, res) => {
+router.post("", async (req, res) => {
     try {
         const tag = await Tag.create(req.body);
         return res.send(tag);
@@ -15,7 +15,7 @@ router.post("/tags", async (req, res) => {
     }
 })
 
-router.get("/tags", async (req, res) => {
+router.get("", async (req, res) => {
     try {
         const tags = await Tag.find().lean().exec(); //mongoose obj to json obj and resolve full promise
         return res.send(tags)
@@ -25,7 +25,7 @@ router.get("/tags", async (req, res) => {
 });
 
 
-router.get("/tags/:id", async (req, res) => {
+router.get("/:id", async (req, res) => {
     try {
         // console.log(req.params)
         const tag = await Tag.findById(req.params.id).lean().exec(); //mongoose obj to json obj and resolve full promise
@@ -36,7 +36,7 @@ router.get("/tags/:id", async (req, res) => {
 });
 
 
-router.patch("/tags/:id", async (req, res) => {
+router.patch("/:id", async (req, res) => {
     try {
         console.log(req.params)
         const tag = await Tag.findByIdAndUpdate(req.params.id, req.body, { new: true })
@@ -48,7 +48,7 @@ router.patch("/tags/:id", async (req, res) => {
 });
 
 
-router.delete("/tags/:id", async (req, res) => {
+router.delete("/:id", async (req, res) => {
     try {
         console.log(req.params)
         const tag = await Tag.findByIdAndDelete(req.params.id).lean().exec(); //mongoose obj to json obj and resolve full promise
