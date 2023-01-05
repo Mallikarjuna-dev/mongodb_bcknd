@@ -2,14 +2,19 @@ const express = require("express");
 
 const connect = require("./configs/db")
 
-const User = require("./models/user.model")
-const Post = require("./models/post.model")
-const Comment = require("./models/comment.model")
-const Tag = require("./models/tag.model")
+const userController = require("./controllers/user.controller")
+const postController = require("./controllers/post.controller")
+const commentController = require("./controllers/comment.controller")
+const tagController = require("./controllers/tag.controller")
 
 const app = express();
 
 app.use(express.json());
+
+app.use("/users", userController);
+app.use("/posts", postController);
+app.use("/comments", commentController);
+app.use("/tags", tagController);
 
 // //step 1: connect to mongoDB
 // mongoose.set("strictQuery", false);
@@ -21,34 +26,14 @@ app.use(express.json());
 //  mongodb://127.0.0.1:27017/
 //  mongodb+srv://mallikarjuna27:Ajju_2748@cluster0.orelrvq.mongodb.net/project?retryWrites=true&w=majority
 
-
-
-
-
-
-
-
 app.listen("2345", async () => {
     try {
         await connect();
         console.log("port running on 2345")
-    }
-    catch (e) {
+    } catch (e) {
         console.log("error:", e.message)
     }
 });
-
-
-
-
-
-
-
-
-
-
-
-
 
 // app.get("/", middleware, (req, res) => {
 //     return res.send(`${req.name} database`)
