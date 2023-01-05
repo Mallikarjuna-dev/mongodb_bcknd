@@ -1,6 +1,4 @@
-
 const mongoose = require("mongoose");
-
 
 //step 2: create a Schema
 const userSchema = new mongoose.Schema({
@@ -23,6 +21,5 @@ const userSchema = new mongoose.Schema({
 // catch (e) {
 //     console.log("error:", e.message)
 // }
-
 
 module.exports = mongoose.model("mock", userSchema);
