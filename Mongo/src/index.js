@@ -2,15 +2,18 @@ const express = require("express");
 
 const mongoose = require("mongoose");
 
+const connect = require("./configs/db")
+
 const app = express();
 
 app.use(express.json());
 
-//step 1: connect to mongoDB
-mongoose.set("strictQuery", false);
-const connect = () => {
-    return mongoose.connect("mongodb+srv://mallikarjuna27:Ajju_2748@cluster0.orelrvq.mongodb.net/project?retryWrites=true&w=majority")
-}
+// //step 1: connect to mongoDB
+// mongoose.set("strictQuery", false);
+
+// const connect = () => {
+//     return mongoose.connect("mongodb+srv://mallikarjuna27:Ajju_2748@cluster0.orelrvq.mongodb.net/project?retryWrites=true&w=majority")
+// }
 
 //  mongodb://127.0.0.1:27017/
 //  mongodb+srv://mallikarjuna27:Ajju_2748@cluster0.orelrvq.mongodb.net/project?retryWrites=true&w=majority
