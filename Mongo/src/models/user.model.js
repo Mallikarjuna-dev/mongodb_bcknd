@@ -14,12 +14,4 @@ const userSchema = new mongoose.Schema({
 })
 
 //step 3: create a model
-// let User;
-// try {
-//     User = mongoose.model("mock", userSchema)
-// }
-// catch (e) {
-//     console.log("error:", e.message)
-// }
-
 module.exports = mongoose.model("mock", userSchema);
