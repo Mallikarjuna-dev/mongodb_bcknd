@@ -4,7 +4,6 @@ const router = express.Router();
 
 const User = require("../models/user.model")
 
-
 // user CRUD methods
 router.post("", async (req, res) => {
     try {
@@ -24,7 +23,6 @@ router.get("", async (req, res) => {
     }
 });
 
-
 router.get("/:id", async (req, res) => {
     try {
         // console.log(req.params)
@@ -34,7 +32,6 @@ router.get("/:id", async (req, res) => {
         return res.status(500).send(e.message)
     }
 });
-
 
 router.patch("/:id", async (req, res) => {
     try {
@@ -46,7 +43,6 @@ router.patch("/:id", async (req, res) => {
         return res.status(500).send(e.message);
     }
 });
-
 
 router.delete("/:id", async (req, res) => {
     try {
