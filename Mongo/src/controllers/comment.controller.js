@@ -18,7 +18,12 @@ router.post("", async (req, res) => {
 
 router.get("", async (req, res) => {
     try {
-        const comments = await Comment.find().lean().exec(); //mongoose obj to json obj and resolve full promise
+        const comments = await Comment.find().populate({
+            path: "post_id", select: ["first_name", "last_name"],
+            populate: [{ path: "user_id", select: ["first_name", "last_name"] },
+            { path: "tag_ids", select: ["name"] },
+            ]
+        }).lean().exec(); //mongoose obj to json obj and resolve full promise
         return res.send(comments)
     } catch (e) {
         return res.status(500).send(e.message)

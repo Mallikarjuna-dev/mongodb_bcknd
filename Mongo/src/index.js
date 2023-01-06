@@ -11,7 +11,7 @@ const app = express();
 
 app.use(express.json());
 
-app.use("/users", userController);
+app.use("/mocks", userController);
 app.use("/posts", postController);
 app.use("/comments", commentController);
 app.use("/tags", tagController);

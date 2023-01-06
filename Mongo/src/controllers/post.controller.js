@@ -2,7 +2,7 @@ const express = require('express');
 
 const router = express.Router();
 
-const Post = require("../models/")
+const Post = require("../models/post.model")
 
 // post CRUD methods
 
@@ -17,7 +17,11 @@ router.post("", async (req, res) => {
 
 router.get("", async (req, res) => {
     try {
-        const posts = await Post.find().lean().exec(); //mongoose obj to json obj and resolve full promise
+        // .populate({path:"user_id", select:["title", "body"]})
+        const posts = await Post.find()
+        .populate({ path: "user_id", select: "first_name" })
+        .populate({ path: "tag_ids", select: "name"})
+        .lean().exec(); //mongoose obj to json obj and resolve full promise
         return res.send(posts)
     } catch (e) {
         return res.status(500).send(e.message)
