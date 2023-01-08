@@ -6,13 +6,16 @@ const router = express.Router();
 
 router.get("", async (req, res) => {
     try {
-        const users = await User.find().lean().exec();
-        return res.send({ users })
+        const page = req.query.page || 1;
+        const size = req.query.size || 15;
+
+        const query = { gender: "Female" };
+        const users = await User.find(query).skip((page - 1) * size).limit(size).lean().exec();
+        const total = Math.ceil(await User.find(query).count() / size);
+        return res.send({ users, total })
     } catch (err) {
         return res.status(500).send({ message: err.message });
     }
 })
-
-
 
 module.exports = router;
