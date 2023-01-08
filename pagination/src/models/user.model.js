@@ -6,8 +6,10 @@ const userSchema = new mongoose.Schema({
     last_name: { type: String, required: true },
     email: { type: String, required: true },
     gender: { type: String, required: true },
-    ip_address: { type: String, required: false }
-},{
-    versionkey:false,
-    time
+    ip_address: { type: String, required: false },
+}, {
+    versionKey: false,
+    timestamps: true,
 })
+
+module.exports = mongoose.model("user", userSchema);
