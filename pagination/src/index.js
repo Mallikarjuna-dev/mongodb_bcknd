@@ -12,7 +12,8 @@ app.listen(2233, async () => {
     try {
         await connect();
         console.log("listening on port 2233");
-    } catch (err) {
+    }
+    catch (err) {
         console.log(err.message);
     }
 })
