@@ -16,6 +16,7 @@ router.get("", async (req, res) => {
         const total = Math.ceil(await User.find(query).count() / size);
 
         return res.send({ users, total })
+        
     } catch (err) {
         return res.status(500).send({ message: err.message });
     }
