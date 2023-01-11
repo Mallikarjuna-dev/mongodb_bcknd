@@ -1,8 +1,19 @@
 const express = require('express');
 
+const { body, validationResult } = require('express-validator');
+
 const User = require("../models/user.model")
 
 const router = express.Router();
+
+router.post("", async (req, res) => {
+    try {
+        const user = await User.create(req.body);
+        return res.send(user);
+    } catch (err) {
+        return res.status(500).send({ message: err.message })
+    }
+})
 
 router.get("", async (req, res) => {
     try {
@@ -16,7 +27,7 @@ router.get("", async (req, res) => {
         const total = Math.ceil(await User.find(query).count() / size);
 
         return res.send({ users, total })
-        
+
     } catch (err) {
         return res.status(500).send({ message: err.message });
     }
