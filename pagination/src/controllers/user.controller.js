@@ -6,11 +6,17 @@ const User = require("../models/user.model")
 
 const router = express.Router();
 
-router.post("", async (req, res) => {
+router.post("", body("id").notEmpty().isNumeric(), async (req, res) => {
+    // console.log(body("id"))
     try {
-        const user = await User.create(req.body);
+        const errors = validationResult(req);
+        if (!errors.isEmpty()) {
+            return res.status(400).json({ errors: errors.array() });
+        }
 
-        return res.send(user);
+        // const user = await User.create(req.body);
+
+        return res.send("user");
 
     } catch (err) {
         return res.status(500).send({ message: err.message })
