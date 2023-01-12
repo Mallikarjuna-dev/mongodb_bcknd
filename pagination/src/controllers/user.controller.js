@@ -8,7 +8,7 @@ const router = express.Router();
 
 router.post("",
     body("id").isNumeric(),
-    body("first_name").isLength({ min: 5, max: 50 }),
+    //body("first_name").isLength({ min: 5, max: 50 }),
     async (req, res) => {
         try {
             const errors = validationResult(req);
