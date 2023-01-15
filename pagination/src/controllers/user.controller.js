@@ -9,6 +9,7 @@ const router = express.Router();
 router.post("",
 
     body("id").isNumeric(),
+    
     //body("first_name").isLength({ min: 5, max: 50 }),
     //body("last_name").isLength({ min: 5, max: 50 }),
     //body("gender").isNumeric()
